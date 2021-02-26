@@ -6,3 +6,7 @@ To get the full code from all the episodes you can support him on Patreon https:
 I tweaked some things from the tutorial and I'm also including more tests to keep learning other OpenGL topics that were not covered by the tutorial.
 
 For the lighting experiments I'm following https://learnopengl.com/Lighting/Basic-Lighting
+
+## Rotating cubes with lighting
+
+![](experiments/rotating_cubes.gif)
