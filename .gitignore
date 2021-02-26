@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+ep_*/
+imgui/
