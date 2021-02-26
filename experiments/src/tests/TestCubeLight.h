@@ -19,6 +19,7 @@ namespace test {
     private:
         void UpdateModel(float ModelCenter[]);
         void UpdateView();
+        void UpdateNormalMatrix();
     public:
         TestCubeLight();
         ~TestCubeLight();
@@ -32,6 +33,7 @@ namespace test {
         std::unique_ptr<IndexBuffer> m_IndexBuffer;
         std::unique_ptr<Shader> m_Shader;
         glm::mat4 m_Proj, m_View, m_Model;
+        glm::mat3 m_Normal;
         float m_LightColor[3];
         float m_LightPosition[3];
         float m_ModelColor_1[3];

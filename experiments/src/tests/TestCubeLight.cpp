@@ -115,6 +115,10 @@ namespace test {
             glm::vec3(ModelCenter[0], ModelCenter[1], ModelCenter[2])) * m_Model;
     }
 
+    void TestCubeLight::UpdateNormalMatrix(){
+        m_Normal = glm::mat3(glm::transpose(glm::inverse(m_Model)));
+    }
+
     void TestCubeLight::UpdateView(){
         m_View = glm::lookAt(
             glm::vec3(m_ViewFrom[0], m_ViewFrom[1], m_ViewFrom[2]),  // camera position
@@ -155,17 +159,20 @@ namespace test {
 
         // Model 1
         UpdateModel(m_ModelCenter_1);
+        UpdateNormalMatrix();
         m_Shader->SetUniformMat4f("u_Model", m_Model);
         m_Shader->SetUniform3f(
             "u_ModelColor", 
             m_ModelColor_1[0], 
             m_ModelColor_1[1],
             m_ModelColor_1[2]);
+        m_Shader->SetUniformMat3f("u_Normal", m_Normal);
 
         renderer.Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
 
         // Model 2
         UpdateModel(m_ModelCenter_2);
+        UpdateNormalMatrix();
         m_Shader->SetUniformMat4f("u_Model", m_Model);
         m_Shader->SetUniform3f(
             "u_ModelColor", 
@@ -178,6 +185,8 @@ namespace test {
     void TestCubeLight::OnImGuiRender(){
         // ImGui::SliderFloat("View: angle", &m_Angle, 0.0f, 6.28f);
         ImGui::ColorEdit3("Light color", m_LightColor);
+        ImGui::SliderFloat3("Light position", m_LightPosition, -1000.f, 1000.0f);
+
         ImGui::SliderFloat3("Viewing from", m_ViewFrom, -2000.0f, 2000.0f);
         ImGui::SliderFloat3("Model center 1", m_ModelCenter_1, -1000.0f, 1000.0f);
         ImGui::Text(
