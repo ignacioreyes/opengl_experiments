@@ -19,6 +19,7 @@
 #include "tests/TestTexture.h"
 #include "tests/Test3D.h"
 #include "tests/TestFloatingHead.h"
+#include "tests/TestCubeLight.h"
 
 
 int main(void)
@@ -72,6 +73,7 @@ int main(void)
     testMenu->RegisterTest<test::TestTexture>("Test Texture");
     testMenu->RegisterTest<test::Test3D>("3D test");
     testMenu->RegisterTest<test::TestFloatingHead>("Floating Head");
+    testMenu->RegisterTest<test::TestCubeLight>("Rotating cubes with lighting");
     
 
     const char* glsl_version = "#version 460";
@@ -93,7 +95,7 @@ int main(void)
                 currentTest->OnUpdate((float) (NewTime-LastTime));
                 LastTime = NewTime;
                 currentTest->OnRender();
-                ImGui::Begin("Test");
+                ImGui::Begin("Controls");
                 if (currentTest != testMenu && ImGui::Button("<-")){
                     delete currentTest;
                     currentTest = testMenu;
