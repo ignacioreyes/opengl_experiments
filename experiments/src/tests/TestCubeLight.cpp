@@ -12,81 +12,58 @@ namespace test {
         m_ModelCenter_1 {0.0f, 0.0f, 0.0f},
         m_ModelCenter_2 {200.0f, 0.0f, -400.0f},
         m_ModelAngle(0.0f),
-        m_AmbientColor {1.0f, 1.0f, 1.0f},
-        m_ModelColor_1 {0.9f, 0.8f, 0.1f, 1.0f},
-        m_ModelColor_2 {0.2f, 0.2f, 0.6f, 1.0f}
+        m_LightColor {1.0f, 1.0f, 1.0f},
+        m_LightPosition {200.0f, 1000.0f, 400.0f},
+        m_ModelColor_1 {0.9f, 0.8f, 0.1f},
+        m_ModelColor_2 {0.2f, 0.2f, 0.6f}
         {
         
-        float positions[42] = {
-            // Face
-            -100.0f,  100.0f,  100.0f,
-             100.0f,  100.0f,  100.0f,
-            -100.0f, -100.0f,  100.0f, 
-             100.0f, -100.0f,  100.0f,
+    float vertices[] = {
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-            // Left side
-             100.0f,  100.0f, -100.0f,
-             100.0f, -100.0f, -100.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-            // Right side
-            -100.0f,  100.0f, -100.0f,
-            -100.0f, -100.0f, -100.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-            // Top
-            -100.0f,  100.0f, -100.0f,
-             100.0f,  100.0f, -100.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-            // Bottom
-            -100.0f, -100.0f, -100.0f,
-             100.0f, -100.0f, -100.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
 
-            // Back
-            -100.0f,  100.0f, -100.0f,
-             100.0f,  100.0f, -100.0f
-        };
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    };
 
-        /*
-        float VertexData[14 * (3 + 4)];
-        float CubeColor[4] = {0.9f, 0.8f, 0.1f, 1.0f};
-        for (int i = 0; i < 14; i++)
+        unsigned int indices[3*6*2];
+
+        for (int i = 0; i < 6; i++)
         {
-            VertexData[i*7] = positions[i*3];
-            VertexData[i*7 + 1] = positions[i*3 + 1];
-            VertexData[i*7 + 2] = positions[i*3 + 2];
-            
-            VertexData[i*7 + 3] = CubeColor[0];
-            VertexData[i*7 + 4] = CubeColor[1];
-            VertexData[i*7 + 5] = CubeColor[2];
-            VertexData[i*7 + 6] = CubeColor[3];
+            int starting_vertex = 4*i;
+            indices[6*i + 0] = starting_vertex + 0;
+            indices[6*i + 1] = starting_vertex + 1;
+            indices[6*i + 2] = starting_vertex + 2;
+
+            indices[6*i + 3] = starting_vertex + 2;
+            indices[6*i + 4] = starting_vertex + 3;
+            indices[6*i + 5] = starting_vertex + 0; 
         }
-        */
         
-
-        unsigned int indices[36] = {
-            // Face
-            0, 2, 1,
-            1, 2, 3,
-
-            // Left side
-            1, 3, 4,
-            3, 5, 4,
-
-            // Right side
-            0, 6, 7,
-            0, 7, 2,
-
-            // Top
-            0, 1, 9,
-            0, 9, 8,
-
-            // Bottom
-            2, 10, 11,
-            2, 11, 3,
-
-            // Back
-            11, 10, 12,
-            12, 13, 11
-        };
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -96,43 +73,53 @@ namespace test {
 
         m_Shader = std::make_unique<Shader>("res/shaders/Colored3D.shader");
         m_VertexArray = std::make_unique<VertexArray>();
-        m_VertexBuffer = std::make_unique<VertexBuffer>(positions, sizeof(positions));
+        m_VertexBuffer = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
         VertexBufferLayout layout;
-        layout.Push(3); // 3D vectors
+        layout.Push(3);  // 3D positions
+        layout.Push(3);  // 3D normals
         m_VertexArray->AddBuffer(*m_VertexBuffer, layout);
 
         m_IndexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices) / sizeof(float));
         
         m_Shader->Bind();
+        m_Proj = glm::perspective(
+            glm::radians(60.0f),
+            1200.0f / 800.0f,
+            1.0f,
+            5000.0f);
+        m_Shader->SetUniformMat4f("u_Proj", m_Proj);
     }
     
     TestCubeLight::~TestCubeLight(){
         glDisable(GL_DEPTH_TEST);
     }
 
-    void TestCubeLight::UpdateMVP(float ModelCenter[]){
-        // m_Proj = glm::ortho(0.0f, 1200.0f, 0.0f, 800.0f, -2000.0f, 2000.0f);
-        m_Proj = glm::perspective(
-            glm::radians(60.0f),
-            1200.0f / 800.0f,
-            1.0f,
-            5000.0f);
-
+    void TestCubeLight::UpdateModel(float ModelCenter[]){
         m_View = glm::lookAt(
             glm::vec3(m_ViewFrom[0], m_ViewFrom[1], m_ViewFrom[2]),  // camera position
             glm::vec3(0.0f, 0.0f, 0.0f),  // where is looking to
             glm::vec3(0, 1, 0));
 
+        float ScalingFactor = 200.0f;
+        m_Model = glm::scale(
+            glm::mat4(1.0f),
+            glm::vec3(ScalingFactor));
+
         m_Model = glm::rotate(
             glm::mat4(1.0f),
             m_ModelAngle,
-            glm::vec3(0.0f, 1.0f, 0.0f));
+            glm::vec3(0.0f, 1.0f, 0.0f)) * m_Model;
 
         m_Model = glm::translate(
             glm::mat4(1.0f), 
             glm::vec3(ModelCenter[0], ModelCenter[1], ModelCenter[2])) * m_Model;
+    }
 
-        m_MVP = m_Proj * m_View * m_Model;
+    void TestCubeLight::UpdateView(){
+        m_View = glm::lookAt(
+            glm::vec3(m_ViewFrom[0], m_ViewFrom[1], m_ViewFrom[2]),  // camera position
+            glm::vec3(0.0f, 0.0f, 0.0f),  // where is looking to
+            glm::vec3(0, 1, 0));
     }
 
     void TestCubeLight::OnUpdate(float deltaTime){
@@ -140,6 +127,23 @@ namespace test {
         if (m_ModelAngle > 2 * glm::pi<float>()) {
             m_ModelAngle -= 2 * glm::pi<float>();
         }
+        UpdateView();
+
+        // Scene uniforms
+        m_Shader->Bind();
+        m_Shader->SetUniform3f(
+            "u_LightColor", 
+            m_LightColor[0], 
+            m_LightColor[1],
+            m_LightColor[2]);
+
+        m_Shader->SetUniform3f(
+            "u_LightPosition", 
+            m_LightPosition[0], 
+            m_LightPosition[1],
+            m_LightPosition[2]);
+
+        m_Shader->SetUniformMat4f("u_View", m_View);
     }
 
     void TestCubeLight::OnRender(){
@@ -147,40 +151,33 @@ namespace test {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         Renderer renderer;
-
         m_Shader->Bind();
-        m_Shader->SetUniform4f(
-            "u_AmbientColor", 
-            m_AmbientColor[0], 
-            m_AmbientColor[1],
-            m_AmbientColor[2],
-            1.0);
 
-        UpdateMVP(m_ModelCenter_1);
-        m_Shader->SetUniformMat4f("u_MVP", m_MVP);
-        m_Shader->SetUniform4f(
+        // Model 1
+        UpdateModel(m_ModelCenter_1);
+        m_Shader->SetUniformMat4f("u_Model", m_Model);
+        m_Shader->SetUniform3f(
             "u_ModelColor", 
             m_ModelColor_1[0], 
             m_ModelColor_1[1],
-            m_ModelColor_1[2],
-            m_ModelColor_1[3]);
+            m_ModelColor_1[2]);
 
         renderer.Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
 
-        UpdateMVP(m_ModelCenter_2);
-        m_Shader->SetUniformMat4f("u_MVP", m_MVP);
-        m_Shader->SetUniform4f(
+        // Model 2
+        UpdateModel(m_ModelCenter_2);
+        m_Shader->SetUniformMat4f("u_Model", m_Model);
+        m_Shader->SetUniform3f(
             "u_ModelColor", 
             m_ModelColor_2[0], 
             m_ModelColor_2[1],
-            m_ModelColor_2[2],
-            m_ModelColor_2[3]);
+            m_ModelColor_2[2]);
         renderer.Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
     }
 
     void TestCubeLight::OnImGuiRender(){
         // ImGui::SliderFloat("View: angle", &m_Angle, 0.0f, 6.28f);
-        ImGui::ColorEdit3("Light color", m_AmbientColor);
+        ImGui::ColorEdit3("Light color", m_LightColor);
         ImGui::SliderFloat3("Viewing from", m_ViewFrom, -2000.0f, 2000.0f);
         ImGui::SliderFloat3("Model center 1", m_ModelCenter_1, -1000.0f, 1000.0f);
         ImGui::Text(
