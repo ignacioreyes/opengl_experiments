@@ -28,12 +28,27 @@ in vec3 v_FragPos;
 uniform vec3 u_ModelColor;
 uniform vec3 u_LightColor;
 uniform vec3 u_LightPosition;
+uniform vec3 u_ViewPosition;
 
 void main(){
+    // Ambient light
+    float AmbientStrength = 0.1;
+    vec3 AmbientLight = AmbientStrength * u_LightColor;
+
+    // Diffuse light
     vec3 norm = normalize(v_Normal);
     vec3 lightDir = normalize(u_LightPosition - v_FragPos);
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * u_LightColor;
-    vec3 ambient = 0.1 * u_LightColor;
-    color = vec4((diffuse + ambient) * u_ModelColor, 1.0);
+    float DiffuseAttenuation = max(dot(norm, lightDir), 0.0);
+    vec3 DiffuseLight = DiffuseAttenuation * u_LightColor;
+
+    // Specular light
+    float SpecularStrength = 0.4;
+    vec3 ViewDirection = normalize(u_ViewPosition - v_FragPos);
+    vec3 ReflectDirection = reflect(-lightDir, norm);
+    float spec = pow(
+        max(dot(ViewDirection, ReflectDirection), 0.0),
+        32);
+    vec3 SpecularLight = SpecularStrength * spec * u_LightColor;
+
+    color = vec4((DiffuseLight + AmbientLight + SpecularLight) * u_ModelColor, 1.0);
 };

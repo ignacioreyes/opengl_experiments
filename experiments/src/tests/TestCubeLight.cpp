@@ -8,47 +8,47 @@
 namespace test {
 
     TestCubeLight::TestCubeLight()
-        : m_ViewFrom {0.0f, 750.0f, 1000.0f}, 
-        m_ModelCenter_1 {0.0f, 0.0f, 0.0f},
-        m_ModelCenter_2 {200.0f, 0.0f, -400.0f},
-        m_ModelAngle(0.0f),
-        m_LightColor {1.0f, 1.0f, 1.0f},
+        : m_LightColor {1.0f, 1.0f, 1.0f},
         m_LightPosition {200.0f, 1000.0f, 400.0f},
         m_ModelColor_1 {0.9f, 0.8f, 0.1f},
-        m_ModelColor_2 {0.2f, 0.2f, 0.6f}
+        m_ModelColor_2 {0.2f, 0.2f, 0.6f},
+        m_ViewFrom {0.0f, 750.0f, 1000.0f}, 
+        m_ModelCenter_1 {0.0f, 101.0f, 0.0f},
+        m_ModelCenter_2 {200.0f, 101.0f, -400.0f},
+        m_ModelAngle(0.0f)
         {
         
-    float vertices[] = {
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        float vertices[] = {
+            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+            0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+            0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+            -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+            0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+            0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+            -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+            -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+            0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+            0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+            0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+            0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+            0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+            0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-    };
+            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+            0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+            0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        };
 
         unsigned int indices[3*6*2];
 
@@ -63,7 +63,39 @@ namespace test {
             indices[6*i + 4] = starting_vertex + 3;
             indices[6*i + 5] = starting_vertex + 0; 
         }
+
+        #define TilesPerSide 30
+        unsigned int floor_tile_positions[6*4*TilesPerSide*TilesPerSide];
         
+        
+        for (int i = 0; i < TilesPerSide; i++)
+        {
+             for (int j = 0; j < TilesPerSide; j++)
+            {
+                float tile0[] = {50.0f * i, 0.0f, 50.0f * j, 0.0f, 1.0f, 0.0f};
+                memcpy(&floor_tile_positions[6*4*(TilesPerSide*i + j)], tile0, sizeof(tile0));
+                float tile1[] = {50.0f * i, 0.0f, 50.0f * j + 45.0f, 0.0f, 1.0f, 0.0f}; 
+                memcpy(&floor_tile_positions[6*4*(TilesPerSide*i + j) + 6], tile1, sizeof(tile1));
+                float tile2[] = {50.0f * i + 45.0f, 0.0f, 50.0f * j, 0.0f, 1.0f, 0.0f}; 
+                memcpy(&floor_tile_positions[6*4*(TilesPerSide*i + j) + 12], tile2, sizeof(tile2));
+                float tile3[] = {50.0f * i + 45.0f, 0.0f, 50.0f * j + 45.0f, 0.0f, 1.0f, 0.0f}; 
+                memcpy(&floor_tile_positions[6*4*(TilesPerSide*i + j) + 18], tile3, sizeof(tile3));   
+            }
+        }        
+
+        unsigned int floor_tile_indices[3*2*TilesPerSide*TilesPerSide];
+
+        for (int i = 0; i < TilesPerSide*TilesPerSide; i++)
+        {
+            int starting_vertex = 4*i;
+            floor_tile_indices[6*i + 0] = starting_vertex + 0;
+            floor_tile_indices[6*i + 1] = starting_vertex + 1;
+            floor_tile_indices[6*i + 2] = starting_vertex + 2;
+
+            floor_tile_indices[6*i + 3] = starting_vertex + 1;
+            floor_tile_indices[6*i + 4] = starting_vertex + 2;
+            floor_tile_indices[6*i + 5] = starting_vertex + 3; 
+        }
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -80,6 +112,12 @@ namespace test {
         m_VertexArray->AddBuffer(*m_VertexBuffer, layout);
 
         m_IndexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices) / sizeof(float));
+
+        m_FloorVertexArray = std::make_unique<VertexArray>();
+        m_FloorVertexBuffer = std::make_unique<VertexBuffer>(floor_tile_positions, sizeof(floor_tile_positions));
+        m_FloorVertexArray->AddBuffer(*m_FloorVertexBuffer, layout);
+        m_FloorIndexBuffer = std::make_unique<IndexBuffer>(
+            floor_tile_indices, sizeof(floor_tile_indices) / sizeof(float));
         
         m_Shader->Bind();
         m_Proj = glm::perspective(
@@ -95,11 +133,6 @@ namespace test {
     }
 
     void TestCubeLight::UpdateModel(float ModelCenter[]){
-        m_View = glm::lookAt(
-            glm::vec3(m_ViewFrom[0], m_ViewFrom[1], m_ViewFrom[2]),  // camera position
-            glm::vec3(0.0f, 0.0f, 0.0f),  // where is looking to
-            glm::vec3(0, 1, 0));
-
         float ScalingFactor = 200.0f;
         m_Model = glm::scale(
             glm::mat4(1.0f),
@@ -113,10 +146,18 @@ namespace test {
         m_Model = glm::translate(
             glm::mat4(1.0f), 
             glm::vec3(ModelCenter[0], ModelCenter[1], ModelCenter[2])) * m_Model;
+        UpdateNormalMatrix();
     }
 
     void TestCubeLight::UpdateNormalMatrix(){
         m_Normal = glm::mat3(glm::transpose(glm::inverse(m_Model)));
+    }
+
+    void TestCubeLight::SetFloorModel(){
+        m_Model = glm::translate(
+            glm::mat4(1.0f), 
+            glm::vec3(-750.0f, 0.0f, -750.0f));
+        UpdateNormalMatrix();
     }
 
     void TestCubeLight::UpdateView(){
@@ -156,10 +197,14 @@ namespace test {
 
         Renderer renderer;
         m_Shader->Bind();
+        m_Shader->SetUniform3f(
+            "u_ViewPosition",
+            m_ViewFrom[0],
+            m_ViewFrom[1],
+            m_ViewFrom[2]);
 
         // Model 1
         UpdateModel(m_ModelCenter_1);
-        UpdateNormalMatrix();
         m_Shader->SetUniformMat4f("u_Model", m_Model);
         m_Shader->SetUniform3f(
             "u_ModelColor", 
@@ -172,7 +217,6 @@ namespace test {
 
         // Model 2
         UpdateModel(m_ModelCenter_2);
-        UpdateNormalMatrix();
         m_Shader->SetUniformMat4f("u_Model", m_Model);
         m_Shader->SetUniform3f(
             "u_ModelColor", 
@@ -180,6 +224,14 @@ namespace test {
             m_ModelColor_2[1],
             m_ModelColor_2[2]);
         renderer.Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
+
+        // Floor
+        SetFloorModel();
+        m_Shader->SetUniformMat4f("u_Model", m_Model);
+        m_Shader->SetUniform3f("u_ModelColor", 0.5f, 0.5f, 0.5f);
+        m_Shader->SetUniformMat3f("u_Normal", m_Normal);
+
+        renderer.Draw(*m_FloorVertexArray, *m_FloorIndexBuffer, *m_Shader);
     }
 
     void TestCubeLight::OnImGuiRender(){

@@ -16,7 +16,7 @@
                 //"-lGLU",
                 "-lGL",
                 "-lGLEW",
-                //"-Wall",
+                "-Wall",
                 "-I${fileDirname}/vendor",
                 //"-O2",
                 //"-ffast-math",

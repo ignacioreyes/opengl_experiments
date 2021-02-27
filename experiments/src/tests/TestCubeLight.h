@@ -18,6 +18,7 @@ namespace test {
     {
     private:
         void UpdateModel(float ModelCenter[]);
+        void SetFloorModel();
         void UpdateView();
         void UpdateNormalMatrix();
     public:
@@ -29,8 +30,11 @@ namespace test {
         void OnImGuiRender() override;
     private:
         std::unique_ptr<VertexArray> m_VertexArray;
-        std::unique_ptr<VertexBuffer> m_VertexBuffer;
+        std::unique_ptr<VertexArray> m_FloorVertexArray;
+        std::unique_ptr<VertexBuffer> m_VertexBuffer; 
+        std::unique_ptr<VertexBuffer> m_FloorVertexBuffer;
         std::unique_ptr<IndexBuffer> m_IndexBuffer;
+        std::unique_ptr<IndexBuffer> m_FloorIndexBuffer;
         std::unique_ptr<Shader> m_Shader;
         glm::mat4 m_Proj, m_View, m_Model;
         glm::mat3 m_Normal;
