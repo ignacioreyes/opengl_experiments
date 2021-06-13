@@ -10,3 +10,8 @@ For the lighting experiments I'm following https://learnopengl.com/Lighting/Basi
 ## Rotating cubes with lighting
 
 ![](experiments/rotating_cubes.gif)
+
+
+## Jelly!
+
+![](experiments/jelly.gif)
