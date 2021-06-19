@@ -20,7 +20,9 @@
                 "-I${fileDirname}/vendor",
                 "-O2",
                 "-ffast-math",
-                "-march=native"
+                "-flto",
+                "-march=native",
+                "-mtune=native"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

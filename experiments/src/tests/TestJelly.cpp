@@ -7,8 +7,8 @@
 #include <cmath>
 
 
-#define VerticesPerSide 80
-#define TileSize (1.0f/79.0f)
+#define VerticesPerSide 100
+#define TileSize (1.0f/99.0f)
 #define kSpring 0.7f
 #define damping 0.00006f
 
@@ -17,7 +17,7 @@ struct Force{
     float forceY;
 };
 
-int get_vertex_1d_index(int x, int y)
+inline int get_vertex_1d_index(int x, int y)
 {
     return y*VerticesPerSide + x;
 }
@@ -138,73 +138,78 @@ namespace test {
             {
                 Force aux_force;
 
-                force_array[get_vertex_1d_index(x, y)*2 + 0] = 0.0f; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] = 0.0f;
+                int force_index_x = get_vertex_1d_index(x, y)*2 + 0;
+                int force_index_y = get_vertex_1d_index(x, y)*2 + 1;
+
+                float force_x = 0.0f;
+                float force_y = 0.0f;
 
                 aux_force = ComputeForce(
                     x, y, -1, -1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, 0, -1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, 1, -1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, -1, 0, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
+
                 aux_force = ComputeForce(
                     x, y, 1, 0, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, -1, 1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, 0, 1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 aux_force = ComputeForce(
                     x, y, 1, 1, m_VertexPositions);
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += aux_force.forceX; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += aux_force.forceY;
+                force_x += aux_force.forceX; 
+                force_y += aux_force.forceY;
 
                 // Damping
                 float x_speed = (
-                    m_VertexPositions[get_vertex_1d_index(x, y)*2 + 0] 
-                    - m_OldVertexPositions[get_vertex_1d_index(x, y)*2 + 0]) / deltaTime;
+                    m_VertexPositions[force_index_x] 
+                    - m_OldVertexPositions[force_index_x]) / deltaTime;
 
                 float y_speed = (
-                    m_VertexPositions[get_vertex_1d_index(x, y)*2 + 1] 
-                    - m_OldVertexPositions[get_vertex_1d_index(x, y)*2 + 1]) / deltaTime;
+                    m_VertexPositions[force_index_y] 
+                    - m_OldVertexPositions[force_index_y]) / deltaTime;
 
-                force_array[get_vertex_1d_index(x, y)*2 + 0] += -x_speed * damping; 
-                force_array[get_vertex_1d_index(x, y)*2 + 1] += -y_speed * damping;
+                force_x += -x_speed * damping; 
+                force_y += -y_speed * damping;
 
+                force_array[force_index_x] = force_x; 
+                force_array[force_index_y] = force_y;
             }
         }
 
         float new_position_grid[2*VerticesPerSide*VerticesPerSide];
 
-        float dm = 1.0f / std::pow(VerticesPerSide, 2.0f);
-
+        float dt_squared_over_dm = std::pow(deltaTime * VerticesPerSide, 2.0f);
         for (int y = 0; y < 2*VerticesPerSide*VerticesPerSide; y++)
         {
             new_position_grid[y] = (
                 2.0f * m_VertexPositions[y] 
                 - m_OldVertexPositions[y]
-                + force_array[y] * std::pow(deltaTime, 2.0f) / dm);
+                + force_array[y] * dt_squared_over_dm);
         }
 
         memcpy(
@@ -216,10 +221,6 @@ namespace test {
             m_VertexPositions, 
             &new_position_grid, 
             sizeof(float)*2*VerticesPerSide*VerticesPerSide);
-
-        m_FloorVertexBuffer->Update(
-            m_VertexPositions,
-            sizeof(float)*2*VerticesPerSide*VerticesPerSide);        
     }
 
     void TestJelly::ResetPositions(){
@@ -245,7 +246,7 @@ namespace test {
 
     void TestJelly::OnUpdate(float deltaTime){
         m_Shader->Bind();
-        int positionUpdatesPerFrame = 5;
+        int positionUpdatesPerFrame = 8;
         for (int i = 0; i < positionUpdatesPerFrame; i++)
         {
             UpdatePositions(1.0f/(60.0f*positionUpdatesPerFrame));
@@ -256,6 +257,10 @@ namespace test {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        m_FloorVertexBuffer->Update(
+            m_VertexPositions,
+            sizeof(float)*2*VerticesPerSide*VerticesPerSide);
+        
         Renderer renderer;
         renderer.Draw(*m_FloorVertexArray, *m_FloorIndexBuffer, *m_Shader);
     }

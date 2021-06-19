@@ -23,6 +23,9 @@
 #include "tests/TestJelly.h"
 
 
+#define DEBUGGING 0
+
+
 int main(void)
 {
     /* Initialize the library */
@@ -82,7 +85,7 @@ int main(void)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     /* Loop until the user closes the window */
-    double LastTime = glfwGetTime();
+    double LastFrameTime = glfwGetTime();
     while (!glfwWindowShouldClose(window))
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -93,11 +96,32 @@ int main(void)
         ImGui::NewFrame();
 
             if (currentTest){
-                double NewTime = glfwGetTime();
-                currentTest->OnUpdate((float) (NewTime-LastTime));
-                LastTime = NewTime;
+                double ThisFrameTime = glfwGetTime();
+
+                double OnUpdateTime = glfwGetTime();
+                currentTest->OnUpdate((float) (ThisFrameTime-LastFrameTime));
+                OnUpdateTime = glfwGetTime() - OnUpdateTime;
+
+                LastFrameTime = ThisFrameTime;
+
+                double OnRenderTime = glfwGetTime();
                 currentTest->OnRender();
+                if (DEBUGGING)
+                {
+                    glFinish();  // For profiling purposes
+                    OnRenderTime = glfwGetTime() - OnRenderTime;
+                }
+                
                 ImGui::Begin("Menu");
+
+                if (DEBUGGING)
+                {
+                    ImGui::Text(
+                    "OnUpdate time %.3f ms, OnRender time %.3f ms",
+                    1000.0 * OnUpdateTime, 1000.0 * OnRenderTime
+                    );
+                }
+                
                 if (currentTest != testMenu && ImGui::Button("<-")){
                     delete currentTest;
                     currentTest = testMenu;
