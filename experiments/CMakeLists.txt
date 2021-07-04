@@ -30,6 +30,7 @@ set(MY_HEADER_FILES
   src/Renderer.h
   src/Texture.h
   src/VertexBuffer.h
+  src/Model.h
 
   src/tests/Test3D.h
   src/tests/TestCubeLight.h
@@ -38,6 +39,8 @@ set(MY_HEADER_FILES
   src/tests/TestClearColor.h
   src/tests/TestFloatingHead.h
   src/tests/TestJelly.h
+  src/tests/TestSuzanne.h
+
   src/vendor/stb_image/stb_image.h
   src/vendor/imgui/imgui.h
 )
@@ -50,7 +53,8 @@ set(MY_SOURCE_FILES
   src/IndexBuffer.cpp
   src/Shader.cpp
   src/VertexArray.cpp
-  
+  src/Model.cpp
+
   src/tests/Test3D.cpp
   src/tests/TestCubeLight.cpp
   src/tests/Test.cpp
@@ -58,6 +62,7 @@ set(MY_SOURCE_FILES
   src/tests/TestClearColor.cpp
   src/tests/TestFloatingHead.cpp
   src/tests/TestJelly.cpp
+  src/tests/TestSuzanne.cpp
   
   src/vendor/stb_image/stb_image.cpp
 

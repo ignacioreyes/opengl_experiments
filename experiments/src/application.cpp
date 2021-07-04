@@ -21,6 +21,7 @@
 #include "tests/TestFloatingHead.h"
 #include "tests/TestCubeLight.h"
 #include "tests/TestJelly.h"
+#include "tests/TestSuzanne.h"
 
 
 #define DEBUGGING 0
@@ -79,6 +80,7 @@ int main(void)
     testMenu->RegisterTest<test::TestFloatingHead>("Floating Head");
     testMenu->RegisterTest<test::TestCubeLight>("Rotating cubes with lighting");
     testMenu->RegisterTest<test::TestJelly>("Shaking Jelly!");
+    testMenu->RegisterTest<test::TestSuzanne>("Suzanne");
     
 
     const char* glsl_version = "#version 460";

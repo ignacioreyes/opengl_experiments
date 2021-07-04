@@ -23,7 +23,7 @@ Texture::Texture(const std::string& path)
     GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer);
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    glBindTexture(GL_TEXTURE_2D, 0);
+    Unbind();
 
     if (m_LocalBuffer)
         stbi_image_free(m_LocalBuffer);

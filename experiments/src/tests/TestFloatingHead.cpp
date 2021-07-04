@@ -6,6 +6,8 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include "../Model.h"
+
 
 namespace test {
 
@@ -14,6 +16,7 @@ namespace test {
         m_ModelCenter {0.0f, 150.0f, 200.0f},
         m_ModelAngle(0.0f) 
         {
+
         UpdateMVP();
         float positions[70] = {
             // Face
